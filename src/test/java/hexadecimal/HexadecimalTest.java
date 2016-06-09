@@ -89,10 +89,23 @@ public class HexadecimalTest {
         assertEquals(expected, Hexadecimal.toDecimal("19ace"));
     }
 
+    /* Original test returned 0 on invalid input.
+     * This makes no sense, since 0 is a valid return value for the input "00000"!
+     * Changed to expect InvalidParameterException to be thrown on invalid inputs.
+     */
     @Test
     public void testInvalid(){
-        int expected = 0;
-        assertEquals(expected, Hexadecimal.toDecimal("carrot"));
+    	try {
+    		Hexadecimal.toDecimal( "carrot" );
+    		fail("Expected to catch InvalidParameterException");
+    	} catch ( InvalidParameterException ipe ) {
+    		
+    	} catch ( Exception e ) {
+    		fail("Should have caught InvalidParameterException");
+    	}
+    	// Original test code.
+        // int expected = 0;
+        // assertEquals(expected, Hexadecimal.toDecimal("carrot"));
     }
 
     @Test
