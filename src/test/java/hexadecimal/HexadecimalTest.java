@@ -108,6 +108,43 @@ public class HexadecimalTest {
 			fail("Should have caught InvalidParameterException.");
 		}
 	}
+	
+	@Test
+	public void test_toDigital_NegativeString_ThrowsException() {
+		try {
+			Hexadecimal.toDecimal( "-10" );
+			fail("Expected to catch InvalidParameterException");
+		} catch ( InvalidParameterException ipe ) {
+			
+		} catch ( Exception e ) {
+			fail("Should have caught InvalidParameterException");
+		}
+	}
+	
+	@Test
+	public void test_toDigital_HugeNumberOne_ThrowsException() {
+		try {
+			Hexadecimal.toDecimal( "efffffff" );
+			fail("Expected to catch InvalidParameterException");
+		} catch ( InvalidParameterException ipe ) {
+			
+		} catch ( Exception e ) {
+			fail("Should have caught InvalidParameterException");
+		}
+	}
+	
+	@Test
+	public void test_toDigital_HugeNumberTwo_ThrowsException() {
+		try {
+			Hexadecimal.toDecimal( "342345434534645abcefffffff" );
+			fail("Expected to catch InvalidParameterException");
+		} catch ( InvalidParameterException ipe ) {
+			
+		} catch ( Exception e ) {
+			fail("Should have caught InvalidParameterException");
+		}
+	}
+	
     @Test
     public void testOne(){
         int expected = 1;
@@ -144,7 +181,7 @@ public class HexadecimalTest {
         assertEquals(expected, Hexadecimal.toDecimal("19ace"));
     }
 
-    /* Original test returned 0 on invalid input.
+    /* Original test expects toDecimal to return 0 on invalid inputs.
      * This makes no sense, since 0 is a valid return value for the input "00000"!
      * Changed to expect InvalidParameterException to be thrown on invalid inputs.
      */

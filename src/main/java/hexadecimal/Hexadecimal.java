@@ -2,11 +2,23 @@ package hexadecimal;
 
 import java.security.InvalidParameterException;
 
+/**
+ * This class handles positive hexadecimal numbers only.
+ * @author jmreed
+ *
+ */
 public class Hexadecimal
 {
 	private static final String INT_MAX_HEX = "7fffffff";
 	
-	
+	/**
+	 * Numbers must be less than INT_MAX.  Throws InvalidParameterException if the hexadecimal string would
+	 * result in a number too large to represent as an integer.
+	 * @param hex
+	 * @return
+	 * @throws NullPointerException
+	 * @throws InvalidParameterException
+	 */
 	public static int toDecimal(String hex) throws NullPointerException, InvalidParameterException {
 		
 		if ( hex.isEmpty( ) ) {
@@ -67,10 +79,12 @@ public class Hexadecimal
 	 * @param input
 	 * @return
 	 */
-	public static boolean isValidHexadecimalString(String input) {
+	public static boolean isValidHexadecimalString(String input) throws InvalidParameterException {
 		
 		if ( input.isEmpty( ) ) {
 			return false;
+		} else if (input.charAt( 0 ) == '-') {
+			throw new InvalidParameterException("input cannot be negative");
 		}
 		
 		try {
