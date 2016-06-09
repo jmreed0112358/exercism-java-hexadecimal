@@ -15,4 +15,10 @@ public class Hexadecimal
 		int result = 0;
 		return result;
 	}
+
+	public static int hexDigitToInt(char hexDigit) throws InvalidParameterException {
+		int result = 0;
+		
+		return result;
+	}
 }

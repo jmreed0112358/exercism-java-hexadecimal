@@ -7,6 +7,29 @@ import org.junit.Test;
 
 public class HexadecimalTest {
 	
+	private char[] hexDigits = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f' };
+	
+	@Test
+	public void test_hexDigitToInt_ValidInputs_ExpectValidOutput() {
+		int actual = 0;
+		for (int i = 0 ; i < hexDigits.length ; i++ ) {
+			actual = Hexadecimal.hexDigitToInt( hexDigits[i] );
+			assertEquals(actual, i); // i happens to be the expected output.
+		}
+	}
+	
+	@Test
+	public void test_hexDigitToInt_InvalidInputs_ThrowsException() {
+		try {
+			Hexadecimal.hexDigitToInt( 'z' );
+			fail("Expected to catch InvalidParameterException");
+		} catch ( InvalidParameterException ipe ) {
+			
+		} catch ( Exception e ) {
+			fail("Should have caught InvalidParameterException");
+		}
+	}
+	
 	@Test
 	public void test_toDecimal_NullString_ThrowsException() {
 		try {
