@@ -28,12 +28,39 @@ public class HexadecimalTest {
 	@Test
 	public void test_isGreaterThan_InvalidInputs_ThrowsException() {
 		try {
-			Hexadecimal.isGreaterThan( "fef", "fef" );
+			Hexadecimal.isGreaterThan( "sdfgsdf", "asdfasdf" );
 			fail("Expected to catch InvalidParameterException");
 		} catch ( InvalidParameterException ipe ) {
 			
 		} catch ( Exception e ) {
 			fail("Should have caught InvalidParameterException");
+		}
+	}
+	
+	@Test
+	public void test_isValidHexadecimalString_ValidInput_ExpectTrue() {
+		assertEquals( Hexadecimal.isValidHexadecimalString( "fef" ), true);
+	}
+	
+	@Test
+	public void test_isValidHexadecimalString_InvalidInput_ExpectFalse() {
+		assertEquals( Hexadecimal.isValidHexadecimalString( "asdfas" ), false);
+	}
+	
+	@Test
+	public void test_isValidHexadecimalString_EmptyString_ExpectFalse() {
+		assertEquals( Hexadecimal.isValidHexadecimalString( "" ), false);
+	}
+	
+	@Test
+	public void test_isValidHexadecimalString_NullString_ThowsException() {
+		try {
+			Hexadecimal.isValidHexadecimalString( null );
+			fail("Expected to catch NullPointerException");
+		} catch ( NullPointerException npe ) {
+			
+		} catch ( Exception e ) {
+			fail("Supposed to catch NullPointerException");
 		}
 	}
 	

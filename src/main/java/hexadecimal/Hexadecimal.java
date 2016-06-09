@@ -24,7 +24,27 @@ public class Hexadecimal
 		return result;
 	}
 	
-	public static boolean isGreaterThan( String first, String second ) {
+	public static boolean isGreaterThan( String first, String second ) throws InvalidParameterException {
+		if ( first.isEmpty( ) || second.isEmpty( ) ) {
+			throw new InvalidParameterException();
+		} else if ( first.length( ) != second.length( ) ) {
+			return ( first.length( ) > second.length( ) );
+		} else if ( first.equals( second ) ) {
+			return false;
+		}
+		
+		for ( int i = 0 ; i < first.length( ) ; i++ ) {
+			if (hexDigitToInt(first.charAt( i )) > hexDigitToInt(second.charAt( i ))) {
+				return true;
+			} else if (hexDigitToInt(first.charAt( i )) < hexDigitToInt(second.charAt( i ))) {
+				return false;
+			}
+		}
+		
+		return false;
+	}
+	
+	public static boolean isValidHexadecimalString(String input) {
 		return false;
 	}
 	
