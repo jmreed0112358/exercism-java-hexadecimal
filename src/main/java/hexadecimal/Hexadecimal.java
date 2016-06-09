@@ -4,14 +4,21 @@ import java.security.InvalidParameterException;
 
 public class Hexadecimal
 {
-	private static final String INT_MAX_HEX = "7FFFFFFF";
+	private static final String INT_MAX_HEX = "7fffffff";
+	
 	
 	public static int toDecimal(String hex) throws NullPointerException, InvalidParameterException {
-		if ( hex == null ) {
-			throw new NullPointerException();
-		}
+		
 		if ( hex.isEmpty( ) ) {
-			throw new InvalidParameterException();
+			throw new InvalidParameterException("Input string cannot be empty");
+		} 
+		
+		hex = hex.toLowerCase( );
+		
+		if ( !isValidHexadecimalString( hex ) ) {
+			throw new InvalidParameterException("Input string was not a valid hexadecimal string");
+		} else if ( isGreaterThan( hex, INT_MAX_HEX) ) {
+			throw new InvalidParameterException("Result is larger than what an int can represent");
 		}
 		// reverse string.
 		String hexReversed = new StringBuilder(hex).reverse( ).toString( );
@@ -25,8 +32,16 @@ public class Hexadecimal
 	}
 	
 	public static boolean isGreaterThan( String first, String second ) throws InvalidParameterException {
+		
 		if ( first.isEmpty( ) || second.isEmpty( ) ) {
-			throw new InvalidParameterException();
+			throw new InvalidParameterException("Input strings cannot be empty");
+		} 
+
+		first = first.toLowerCase( );
+		second = second.toLowerCase( );
+		
+		if ( !isValidHexadecimalString( first ) || !isValidHexadecimalString( second )) {
+			throw new InvalidParameterException("Input strings were not valid hexadecimal strings");
 		} else if ( first.length( ) != second.length( ) ) {
 			return ( first.length( ) > second.length( ) );
 		} else if ( first.equals( second ) ) {
@@ -44,8 +59,28 @@ public class Hexadecimal
 		return false;
 	}
 	
+	/**
+	 * Checks the input string for validity.
+	 * Abuse hexDigitToInt behavior to check each char in the string,
+	 * return false if InvalidParameterException is thrown,
+	 * return true if every char is valid.
+	 * @param input
+	 * @return
+	 */
 	public static boolean isValidHexadecimalString(String input) {
-		return false;
+		
+		if ( input.isEmpty( ) ) {
+			return false;
+		}
+		
+		try {
+			for ( int i = 0 ; i < input.length( ) ; i++ ) {
+				hexDigitToInt(input.charAt( i ));
+			}
+			return true;
+		} catch ( InvalidParameterException ipe ) {
+			return false;
+		}
 	}
 	
 	public static int hexDigitToInt(char hexDigit) throws InvalidParameterException {
