@@ -4,6 +4,8 @@ import java.security.InvalidParameterException;
 
 public class Hexadecimal
 {
+	private static final String INT_MAX_HEX = "7FFFFFFF";
+	
 	public static int toDecimal(String hex) throws NullPointerException, InvalidParameterException {
 		if ( hex == null ) {
 			throw new NullPointerException();
@@ -21,7 +23,11 @@ public class Hexadecimal
 			// result += hexDigitToInt(char) * pow(16, i)
 		return result;
 	}
-
+	
+	public static boolean isGreaterThan( String first, String second ) {
+		return false;
+	}
+	
 	public static int hexDigitToInt(char hexDigit) throws InvalidParameterException {
 		switch ( hexDigit ) {
 			case '0':
