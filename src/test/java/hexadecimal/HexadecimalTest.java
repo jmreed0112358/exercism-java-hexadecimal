@@ -1,9 +1,35 @@
 package hexadecimal;
+import static org.junit.Assert.*;
+
+import java.security.InvalidParameterException;
+
 import org.junit.Test;
-import static org.junit.Assert.assertEquals;
 
 public class HexadecimalTest {
-
+	
+	@Test
+	public void test_toDecimal_NullString_ThrowsException() {
+		try {
+			Hexadecimal.toDecimal( null );
+			fail("Expected to catch NullPointerException");
+		} catch ( NullPointerException npe ) {
+			
+		} catch ( Exception e ) {
+			fail("Should have caught NullPointerException");
+		}
+	}
+	
+	@Test
+	public void test_toDecimal_EmptyString_ThrowsException() {
+		try {
+			Hexadecimal.toDecimal( "" );
+			fail("Expected to catch InvalidParameterException");
+		} catch ( InvalidParameterException ipe ) {
+			
+		} catch ( Exception e ) {
+			fail("Should have caught InvalidParameterException.");
+		}
+	}
     @Test
     public void testOne(){
         int expected = 1;
