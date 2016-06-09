@@ -26,6 +26,18 @@ public class HexadecimalTest {
 	}
 	
 	@Test
+	public void test_isGreaterThan_InvalidInputs_ThrowsException() {
+		try {
+			Hexadecimal.isGreaterThan( "fef", "fef" );
+			fail("Expected to catch InvalidParameterException");
+		} catch ( InvalidParameterException ipe ) {
+			
+		} catch ( Exception e ) {
+			fail("Should have caught InvalidParameterException");
+		}
+	}
+	
+	@Test
 	public void test_hexDigitToInt_ValidInputs_ExpectValidOutput() {
 		int actual = 0;
 		for (int i = 0 ; i < hexDigits.length ; i++ ) {
